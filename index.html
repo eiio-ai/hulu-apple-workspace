@@ -231,7 +231,13 @@ canvas{width:100%!important;max-height:260px;display:block;margin-top:8px}
 
 <!-- ========== FEED PAGE ========== -->
 <section class="page active" id="page-feed">
-  <div class="page-title">📰 图文笔记信息流</div>
+  <div class="page-title" style="display:flex;justify-content:space-between;align-items:center">
+    <span>📰 图文笔记信息流</span>
+    <span style="font-size:12px;color:var(--text3);cursor:pointer;display:flex;align-items:center;gap:12px">
+      <span style="color:var(--red);font-weight:500">🆕 今日推送</span>
+      <span onclick="showVideoHistory()">📹 视频记录</span>
+    </span>
+  </div>
   <div class="feed-tabs" id="feedTabs"></div>
   <div class="feed-grid" id="feedGrid"></div>
   <p style="text-align:center;color:var(--text3);font-size:12px;margin-top:14px;cursor:pointer" onclick="loadMoreFeed()">⬇ 加载更多历史笔记</p>
@@ -526,7 +532,7 @@ canvas{width:100%!important;max-height:260px;display:block;margin-top:8px}
 <!-- MODALS -->
 <div class="fc-modal" id="fcModal"><div class="fc-modal-inner" id="fcModalInner"></div></div>
 <div class="toast" id="toast"></div>
-<div class="update-banner" id="updateBanner" onclick="updateApp()">🔄 发现新版本，点击更新</div>
+<div class="update-banner" id="updateBanner">🔄 发现新版本，<span onclick="updateApp()" style="text-decoration:underline;cursor:pointer">点击更新</span> <span onclick="event.stopPropagation();dismissUpdateBanner()" style="margin-left:12px;cursor:pointer;opacity:0.7">✕</span></div>
 <div class="backup-reminder" id="backupReminder"><div class="br-inner"><div class="emoji-big">💾</div><h3>数据备份提醒</h3><p id="backupReminderMsg"></p><button class="btn btn-p" onclick="exportData();closeBackupReminder()">📤 立即导出备份</button><button class="btn btn-o" style="margin-top:8px" onclick="closeBackupReminder()">稍后再说</button></div></div>
 
 <script>
@@ -594,9 +600,7 @@ function genFeedNotes(){
     {id:'ops9',cat:'ops',title:'店铺每日运营流程',body:'上午：\n• 查看昨日数据（展现/点击/询盘/成交）\n• 回复未读询盘消息\n• 检查产品排名变化\n\n下午：\n• 优化推广计划出价\n• 处理订单发货\n• 发布1-2条新品或优化老品\n\n晚间：\n• 复盘今日数据\n• 准备次日推广素材',data:'每日新品: 1-2条 | 数据监控: 展现/点击/转化',v:1},
     {id:'ops10',cat:'ops',title:'1688推广费合理占比',body:'推广费用占销售额比例参考：\n\n• 初创期（前3月）：15-25%（抢占市场）\n• 成长期（3-12月）：10-15%（稳定获客）\n• 成熟期（12月+）：5-10%（品牌效应）\n\n注意：不同类目差异大，工业品通常低于快消品。核心看ROI，ROI达标就可以加预算。',data:'初创期: 15-25% | 成长期: 10-15% | 成熟期: 5-10%',v:1},
     {id:'ops11',cat:'ops',title:'精准获客：数字营销组合打法',body:'组合打法=搜索推广+推荐场景+内容营销\n\n1. 搜索推广（占60%预算）：精准关键词，拦截有明确需求的买家\n2. 推荐场景（占25%预算）：猜你喜欢、详情页推荐，拓展潜在客户\n3. 内容营销（占15%预算）：视频、直播、买家秀，提升信任感\n\n三者互补，不能只靠搜索。',data:'搜索60%+推荐25%+内容15% | 组合效果优于单一投放',v:1},
-    {id:'ops12',cat:'ops',title:'店铺日常复盘核心指标',body:'每日必看6个指标：\n\n1. 展现量：是否有曝光\n2. 点击率(CTR)：标题/主图是否吸引人\n3. 点击转化率：详情页是否打动人\n4. 询盘量：咨询数量\n5. 成交额：实际成交金额\n6. ROI：投入产出比\n\n周度复盘增加：客户新增数、复购率、退货率。',data:'6大核心指标 | 日复盘+周复盘',v:1},
-    {id:'ops13',cat:'ops',title:'🎥 1688运营全套教程 | 从入门到精通',body:'如果你在自学1688运营时能遇到这套教程该有多好！从店铺搭建、标题优化到数字营销、数据分析，全套系统课程。\n\n课程亮点：\n• 新手开店基础搭建全流程\n• 标题优化+主图设计方法论\n• 生意参谋数据深度分析\n• 数字营销推广实操\n\n🎬 点击下方链接跳转B站观看完整教程。',type:'video',videoUrl:'https://www.bilibili.com/video/BV1qa4y1m7HN/',videoCover:'🎬',data:'⏱ 视频时长: 约7小时 | 📺 来源: B站 | 👁 16.9万播放',v:1},
-    {id:'ops14',cat:'ops',title:'🎥 1688运营日常必做五大块',body:'每天不知道做什么？亿事君手把手教你1688运营日常工作清单。\n\n五大块内容：\n• 数据监控：展现/点击/转化/询盘\n• 商品优化：标题/主图/详情页\n• 推广调整：关键词出价优化\n• 客户维护：询盘跟进/老客回访\n• 竞品分析：同行动态追踪\n\n照着清单做，运营不再迷茫！\n\n🎬 点击下方链接跳转B站观看完整视频。',type:'video',videoUrl:'https://www.bilibili.com/video/BV1Lt4y1G7o8/',videoCover:'🎬',data:'⏱ 视频时长: 约2分钟 | 📺 来源: B站 亿事君',v:1}
+    {id:'ops12',cat:'ops',title:'店铺日常复盘核心指标',body:'每日必看6个指标：\n\n1. 展现量：是否有曝光\n2. 点击率(CTR)：标题/主图是否吸引人\n3. 点击转化率：详情页是否打动人\n4. 询盘量：咨询数量\n5. 成交额：实际成交金额\n6. ROI：投入产出比\n\n周度复盘增加：客户新增数、复购率、退货率。',data:'6大核心指标 | 日复盘+周复盘',v:1}
   );
   // 面试
   base.push(
@@ -607,9 +611,7 @@ function genFeedNotes(){
     {id:'iv5',cat:'interview',title:'期望薪资谈判话术',body:'策略：先了解岗位薪资范围，再给出合理区间\n\n话术："根据岗位要求和我的经验，我的期望薪资区间是XX-XX。同时我也看重成长空间和团队氛围，薪资可以再沟通。"\n\n准备：提前查同类岗位市场薪资（BOSS直聘可参考）。\n\n底线：心里设一个最低接受数，低于这个不妥协。',data:'策略: 区间谈判 | 准备: 查市场薪资',v:1},
     {id:'iv6',cat:'interview',title:'1688运营高频追问',body:'1. "说说你运营过的最成功的产品案例"\n→ STAR法则：背景+任务+行动+结果（带数据）\n\n2. "ROI下降你会怎么排查？"\n→ 关键词→人群→出价→时间→落地页，逐层排查\n\n3. "怎么判断一个产品要不要加大推广？"\n→ 看询盘成本、转化率、毛利率，算投入产出\n\n4. "遇到恶意点击怎么办？"\n→ 屏蔽IP/地域 + 调整出价策略 + 联系客服',data:'STAR法则 | ROI排查5步法',v:1},
     {id:'iv7',cat:'interview',title:'面试反问环节：应该问什么',body:'✅ 好的反问：\n• 团队目前的核心目标是什么？\n• 这个岗位最大的挑战是什么？\n• 公司对1688渠道的规划是怎样的？\n\n❌ 不要问：\n• 多久能涨薪？\n• 加班多不多？\n• 公司福利好不好？（等HR主动说）\n\n反问环节也是展示你思考深度的机会。',data:'准备3个有深度的问题',v:1},
-    {id:'iv8',cat:'interview',title:'工贸一体企业面试要点',body:'工贸一体=工厂+贸易公司，自己生产自己销售\n\n面试加分点：\n• 了解工厂生产流程（产能、交期、MOQ）\n• 能讲清楚线上线下协同\n• 知道怎么处理定制单\n\n常见问题：\n"如果有客户要求降价，你怎么办？"\n→ 分析成本结构，在保证质量前提下看是否有降价空间；或通过增大订单量来谈价格。',data:'工贸一体优势: 品控+价格+定制能力',v:1},
-    {id:'iv9',cat:'interview',title:'🎥 万字求职指南 | 从简历到Offer全攻略',body:'程序员鱼皮出品的保姆级求职宝典，覆盖求职全流程：\n\n• 岗位选择与职业定位\n• 简历怎么写不被刷掉（含STAR法则详解）\n• 投递技巧和时间节点\n• 笔试/面试/薪资谈判全攻略\n• Offer选择避坑指南\n\n不管你是不是程序员，求职逻辑都是相通的~\n\n🎬 点击下方链接跳转B站观看完整视频。',type:'video',videoUrl:'https://www.bilibili.com/video/BV1LEQLYqEGT/',videoCover:'🎬',data:'⏱ 视频时长: 约40分钟 | 📺 来源: B站 程序员鱼皮',v:1},
-    {id:'iv10',cat:'interview',title:'🎥 结构化面试干货 | 态度观点类答题模板',body:'多次事业单位面试第一的UP主分享结构化面试独家攻略：\n\n• 面试前：思维导图+逐字稿练习法\n• 面试中：自信大方，牢记"自己说的就是最好的"\n• 面试后：总结复盘，转为实务经验\n\n适用于：公务员/事业单位/国企等结构化面试\n\n🎬 点击下方链接跳转B站观看完整视频。',type:'video',videoUrl:'https://www.bilibili.com/video/BV1U3hBz7Egn/',videoCover:'🎬',data:'⏱ 视频时长: 约30分钟 | 📺 来源: B站 | 适用: 结构化面试',v:1}
+    {id:'iv8',cat:'interview',title:'工贸一体企业面试要点',body:'工贸一体=工厂+贸易公司，自己生产自己销售\n\n面试加分点：\n• 了解工厂生产流程（产能、交期、MOQ）\n• 能讲清楚线上线下协同\n• 知道怎么处理定制单\n\n常见问题：\n"如果有客户要求降价，你怎么办？"\n→ 分析成本结构，在保证质量前提下看是否有降价空间；或通过增大订单量来谈价格。',data:'工贸一体优势: 品控+价格+定制能力',v:1}
   );
   // 减脂
   base.push(
@@ -617,26 +619,20 @@ function genFeedNotes(){
     {id:'dt2',cat:'diet',title:'每日热量参考',body:'基础代谢（BMR）估算：\n女性：655 + 9.6×体重(kg) + 1.8×身高(cm) - 4.7×年龄\n\n减脂期每日热量摄入 = BMR × 1.2 - 300~500大卡\n\n食物热量速查：\n• 1碗米饭(150g)：约174大卡\n• 1个鸡蛋：约70大卡\n• 100g鸡胸肉：约133大卡\n• 1个苹果：约85大卡',data:'减脂热量差: 300-500大卡/天',v:1},
     {id:'dt3',cat:'diet',title:'女生居家低强度运动推荐',body:'适应期推荐（新手友好）：\n• 快走30分钟（消耗约120大卡）\n• 全身拉伸15分钟\n• 瑜伽基础体式\n\n进阶推荐：\n• 帕梅拉低强度有氧 20min\n• 核心塑形 15min\n• 低冲击踏步 25min\n\n频率：每周4-5次，每次25-35分钟\n\n⚠ 经期避免剧烈运动，以散步拉伸为主。',data:'频率: 4-5次/周 | 时长: 25-35分钟',v:1},
     {id:'dt4',cat:'diet',title:'减脂饮食搭配原则',body:'每餐搭配：1拳碳水 + 1掌蛋白质 + 2拳蔬菜\n\n碳水类：糙米、紫薯、全麦面包\n蛋白质：鸡蛋、鸡胸肉、鱼虾、豆腐\n蔬菜类：绿叶菜优先，少油少盐\n\n❌ 避开：含糖饮料、油炸食品、精制碳水\n🕐 晚餐建议18:00-19:00之间，睡前3小时不进食',data:'搭配: 1拳碳水+1掌蛋白+2拳蔬菜',v:1},
-    {id:'dt5',cat:'diet',title:'减脂防反弹策略',body:'减到目标体重后如何维持：\n\n1. 逐步增加热量（每周+100大卡），不要突然恢复饮食\n2. 保持运动习惯（每周至少2-3次）\n3. 每周称一次体重，浮动>2斤及时调整\n4. 允许偶尔放纵，不要有负罪感\n\n核心心态：减脂是一段旅程的终点，健康饮食是终身习惯。',data:'维持期: 每周2-3次运动 | 警戒线: 浮动>2斤',v:1},
-    {id:'dt6',cat:'diet',title:'🎥 帕梅拉15分钟高效燃脂',body:'无需器械、全程站立、新手也能跟上的高效燃脂训练。帕梅拉（Pamela Reif）15分钟跳跃有氧，配乐动感，快乐暴汗~\n\n适合场景：\n• 早起空腹有氧\n• 午休碎片时间\n• 下班后释放压力\n\n🎬 点击下方链接跳转B站观看完整跟练视频。',type:'video',videoUrl:'https://www.bilibili.com/video/BV1QS4y1P7Yu/',videoCover:'🎬',data:'⏱ 视频时长: 约15分钟 | 📺 来源: B站 帕梅拉PamelaReif',v:1},
-    {id:'dt7',cat:'diet',title:'🎥 欧阳春晓30分钟普拉提瘦全身',body:'欧阳春晓的私教级普拉提课程，无跑跳、膝盖友好，适合大基数和初学者。\n\n特色：\n• 全程口令指导，像私教在身边\n• 减脂+塑形+修复体态三合一\n• 站立完成，小空间友好\n\n🎬 点击下方链接跳转B站观看完整跟练视频。',type:'video',videoUrl:'https://www.bilibili.com/video/BV1Di421U7am/',videoCover:'🎬',data:'⏱ 视频时长: 约30分钟 | 📺 来源: B站 欧阳春晓Aurora',v:1}
+    {id:'dt5',cat:'diet',title:'减脂防反弹策略',body:'减到目标体重后如何维持：\n\n1. 逐步增加热量（每周+100大卡），不要突然恢复饮食\n2. 保持运动习惯（每周至少2-3次）\n3. 每周称一次体重，浮动>2斤及时调整\n4. 允许偶尔放纵，不要有负罪感\n\n核心心态：减脂是一段旅程的终点，健康饮食是终身习惯。',data:'维持期: 每周2-3次运动 | 警戒线: 浮动>2斤',v:1}
   );
   // 英语
   base.push(
     {id:'en1',cat:'english',title:'英语学习碎片化方法',body:'每日20-35分钟，三个环节：\n\n1. 单词积累（10分钟）\n• 每天10-15个新词\n• 用App（百词斩/墨墨）记忆+复习\n\n2. 听力训练（10-15分钟）\n• 听慢速英语/ESL Podcast\n• 先泛听再精听\n\n3. 短句阅读（5-10分钟）\n• 读英文短文/新闻\n• 标记生词和好句',data:'每日20-35分钟 | 单词+听力+阅读',v:1},
     {id:'en2',cat:'english',title:'英音vs美音基础区别',body:'英音（RP/Received Pronunciation）：\n• r不卷舌（car→"cah"）\n• a发长音（bath→"bahth"）\n• t清晰发音（water→"waw-tuh"）\n\n美音（General American）：\n• r卷舌（car→"carr"）\n• a发短音（bath→"bath"）\n• t浊化（water→"wadder"）\n\n建议：选定一种口音后坚持练习，不要混搭。',data:'英音: 不卷舌+清晰t | 美音: 卷舌+浊化t',v:1},
     {id:'en3',cat:'english',title:'听力提升阶梯法',body:'阶段1（入门）：\n• 慢速英语新闻（VOA慢速）\n• 看英文字幕的短剧\n\n阶段2（进阶）：\n• 正常语速播客（BBC 6 Minute English）\n• 关字幕看熟悉的美剧\n\n阶段3（高阶）：\n• 无字幕看新内容\n• 听TED演讲做笔记\n\n关键：听不懂也要听完第一遍，第二遍再查词。',data:'阶梯: 慢速→正常→无字幕 | 二遍法',v:1},
-    {id:'en4',cat:'english',title:'英语面试常用表达',body:'自我介绍开头：\n"Thank you for having me. I\'ve been working in..."\n\n描述能力：\n"I\'m experienced in... I successfully managed to..."\n\n回答提问：\n"That\'s a great question. From my perspective..."\n\n结束语：\n"I really appreciate your time. I look forward to hearing from you."',data:'场景: 英文面试 | 类型: 常用句型',v:1},
-    {id:'en5',cat:'english',title:'🎥 英语语法：16种时态终极详解',body:'英语兔出品，B站最受欢迎的英语语法课！一个视频合集搞定所有英语时态，看完就懂~\n\n内容覆盖：\n• 一般现在时/过去时/将来时\n• 现在进行时/过去进行时\n• 现在完成时/过去完成时\n• 虚拟语气等重点难点\n\n配套大量例句和对比表格，零基础也能跟上。\n\n🎬 点击下方链接跳转B站观看完整视频。',type:'video',videoUrl:'https://www.bilibili.com/video/BV1Sv411y7d8/',videoCover:'🎬',data:'⏱ 视频时���: 约1小时 | 📺 来源: B站 英语兔 | 👁 1028万播放',v:1},
-    {id:'en6',cat:'english',title:'🎥 绝佳英语听力素材！央视《美丽中国》53集',body:'不背下来都可惜的英语听力神作！央视出品《美丽中国》系列短片，中英双语字幕。\n\n推荐理由：\n• 标准英音旁白，语速适中\n• 每集2-4分钟，适合碎片时间\n• 内容涵盖中国各地自然风光和文化\n• 词汇实用，表达地道\n\n每天听2集，一个月听力飞跃~ 🎧\n\n🎬 点击下方链接跳转B站观看完整合集。',type:'video',videoUrl:'https://www.bilibili.com/video/BV1Ey4y1B7ud/',videoCover:'🎬',data:'⏱ 53集 | 📺 来源: B站 油兔英语笔记 | 👁 1002万播放',v:1}
+    {id:'en4',cat:'english',title:'英语面试常用表达',body:'自我介绍开头：\n"Thank you for having me. I\'ve been working in..."\n\n描述能力：\n"I\'m experienced in... I successfully managed to..."\n\n回答提问：\n"That\'s a great question. From my perspective..."\n\n结束语：\n"I really appreciate your time. I look forward to hearing from you."',data:'场景: 英文面试 | 类型: 常用句型',v:1}
   );
   // 英音口语
   base.push(
     {id:'sp1',cat:'speaking',title:'英音发音基础：元音篇',body:'英音RP核心元音：\n\n/ɑː/ - bath, grass, dance（嘴巴张大，舌后部压低）\n/ɒ/ - hot, dog, coffee（短促有力）\n/ɜː/ - bird, word, learn（舌尖不接触任何地方）\n\n练习句子：\n"The glass is half full."\n"A hot cup of coffee, please."\n\n🎧 推荐：BBC Learning English - Pronunciation',data:'音频素材: BBC Learning English',v:1},
     {id:'sp2',cat:'speaking',title:'英音发音基础：辅音篇',body:'关键辅音区别：\n\n/t/ 清晰发音（不浊化）：\n• better → "beh-tuh"（非"bedder"）\n• water → "waw-tuh"\n\n/r/ 不卷舌：\n• car → "cah"\n• here → "hee-uh"\n\n/θ/ 和 /ð/（咬舌音）：\n• think, three (/θ/)\n• this, that (/ð/)',data:'核心: 不浊化t + 不卷舌r',v:1},
-    {id:'sp3',cat:'speaking',title:'英音语调：RP的抑扬顿挫',body:'英音语调特征：\n\n1. 陈述句降调（结尾向下）\n2. 一般疑问句升调（结尾向上）\n3. 特殊疑问句降调\n\n练习方法：\n• 模仿BBC新闻主播的语调\n• 录音对比自己的发音\n• 重点练句末语调\n\n推荐模仿素材：\n🎥 The Crown（王冠）\n🎥 Downton Abbey（唐顿庄园）',data:'推荐剧: The Crown / Downton Abbey',v:1},
-    {id:'sp4',cat:'speaking',title:'🎥 BBC官方音标教程 | 英式发音零基础入门',body:'B站最经典的英音入门教程！BBC官方出品，中英双语字幕。\n\n课程内容：\n• 92集系统讲解英式音标\n• 真人嘴型示范每个发音\n• 元音、辅音、双元音全覆盖\n• 英音英伦腔口语养成路线\n\n619万播放的神级教程，学英音必看！🇬🇧\n\n🎬 点击下方链接跳转B站观看完整教程。',type:'video',videoUrl:'https://www.bilibili.com/video/BV127411n7nj/',videoCover:'🎬',data:'⏱ 92集 | 📺 来源: B站 BBC官方 | 👁 619万播放',v:1},
-    {id:'sp5',cat:'speaking',title:'🎥 如何练成一口纯正的英式口音？| 全英教学分享',body:'没去过英国也能练出纯正RP口音！在英国生活多年的Cristina分享干货：\n\n• 英音核心发音技巧拆解\n• 常见中式发音错误纠正\n• 日常跟读练习方法\n• 推荐英音学习素材\n\n全英文讲解+中文字幕，练习听力同时学发音~\n\n🎬 点击下方链接跳转B站观看完整视频。',type:'video',videoUrl:'https://www.bilibili.com/video/BV1hV411f7cb/',videoCover:'🎬',data:'⏱ 约5分钟 | 📺 来源: B站 CristinaLee_ | 👁 41万播放',v:1}
+    {id:'sp3',cat:'speaking',title:'英音语调：RP的抑扬顿挫',body:'英音语调特征：\n\n1. 陈述句降调（结尾向下）\n2. 一般疑问句升调（结尾向上）\n3. 特殊疑问句降调\n\n练习方法：\n• 模仿BBC新闻主播的语调\n• 录音对比自己的发音\n• 重点练句末语调\n\n推荐模仿素材：\n🎥 The Crown（王冠）\n🎥 Downton Abbey（唐顿庄园）',data:'推荐剧: The Crown / Downton Abbey',v:1}
   );
   // 变美
   base.push(
@@ -644,18 +640,14 @@ function genFeedNotes(){
     {id:'by2',cat:'beauty',title:'鹅蛋脸适配发型',body:'✅ 适合：\n• 高颅顶蓬松披发（显脸小）\n• 锁骨层次发（有空气感）\n• 法式八字刘海（修饰额头）\n• 慵懒大波浪（增加温柔感）\n\n❌ 避开：\n• 贴头皮直发（显脸大）\n• 厚重齐刘海（显沉闷）\n• 过短的精灵短发（需五官立体）',data:'推荐: 锁骨发+八字刘海 | 避雷: 贴头皮',v:1},
     {id:'by3',cat:'beauty',title:'莫兰迪色系穿搭',body:'莫兰迪色系=低饱和度高级灰调\n\n适合淡颜的配色：\n• 燕麦色 + 奶白色\n• 灰粉 + 浅驼\n• 雾霾蓝 + 米灰\n• 豆沙绿 + 奶油色\n\n面试通勤推荐：\n• 米白衬衫+烟管裤+芭蕾鞋\n• 灰粉针织+半身裙+乐福鞋\n\n核心：同一身不超过3个颜色，整体和谐高级。',data:'色系: 莫兰迪+低饱和 | 面试: 米白+烟管裤',v:1},
     {id:'by4',cat:'beauty',title:'淡颜面试妆容要点',body:'面试妆=精神+干净+自然\n\n底妆：轻薄+遮黑眼圈\n眉毛：自然弯眉，有毛流感\n眼妆：大地色打底+内眼线\n口红：豆沙/蜜桃（不要太红艳）\n\n时间建议：15分钟搞定\n\n加分项：面试前护肤+敷个面膜，底妆更服帖\n\n核心原则：看着精神、不突兀、凸显你本身的优点。',data:'时长: 15分钟 | 口红: 豆沙/蜜桃 | 关键词: 精神干净',v:1},
-    {id:'by5',cat:'beauty',title:'护肤基础流程',body:'早晚基础护肤：\n☀ 早：洁面→爽肤水→精华→乳液→防晒\n🌙 晚：卸妆→洁面→爽肤水→精华→面霜\n\n淡颜护肤重点：\n• 防晒是抗老第一防线（必须！）\n• 补水比美白更重要\n• 去角质每周1次即可\n\n❌ 不要过度清洁\n❌ 不要频繁换护肤品\n✅ 找到适合自己的就坚持',data:'核心: 防晒+补水+不折腾',v:1},
-    {id:'by6',cat:'beauty',title:'🎥 扁平脸淡颜日常妆 | 12分钟保姆级教程',body:'漫笙出品，专为淡颜扁平脸打造的日常妆容教程，从妆前护肤开始手把手跟练。\n\n适合人群：\n• 淡颜系女生\n• 化妆新手\n• 想学"伪素颜"自然妆感\n\n步骤拆解超详细，怼脸拍摄每个细节都看得清清楚楚~\n\n🎬 点击下方链接跳转B站观看完整视频教程。',type:'video',videoUrl:'https://www.bilibili.com/video/BV1CwQ6YsEiR/',videoCover:'🎬',data:'⏱ 视频时长: 约12分钟 | 📺 来源: B站 漫笙 | 适合: 淡颜/新手',v:1},
-    {id:'by7',cat:'beauty',title:'🎥 3个技巧拯救扁塌细软发质 | 高颅顶蓬松教程',body:'扁塌细软发质的救星！学会正确吹头发+造型手法，打造蓬松高颅顶。\n\n教程涵盖：\n• 吹风机正确使用方法\n• 发根蓬松夹技巧\n• 定型喷雾分区教程\n• 不伤发质的日常造型法\n\n🎬 点击下方链接跳转B站观看完整视频教程。',type:'video',videoUrl:'https://www.bilibili.com/video/BV1JS4y1G7ek/',videoCover:'🎬',data:'⏱ 视频时长: 约8分钟 | 📺 来源: B站 | 适合: 细软发质',v:1}
+    {id:'by5',cat:'beauty',title:'护肤基础流程',body:'早晚基础护肤：\n☀ 早：洁面→爽肤水→精华→乳液→防晒\n🌙 晚：卸妆→洁面→爽肤水→精华→面霜\n\n淡颜护肤重点：\n• 防晒是抗老第一防线（必须！）\n• 补水比美白更重要\n• 去角质每周1次即可\n\n❌ 不要过度清洁\n❌ 不要频繁换护肤品\n✅ 找到适合自己的就坚持',data:'核心: 防晒+补水+不折腾',v:1}
   );
   // 记账
   base.push(
     {id:'fi1',cat:'finance',title:'月预算制定法',body:'50/30/20法则：\n• 50%必需开支（房租/餐饮/交通）\n• 30%品质消费（购物/娱乐/美妆）\n• 20%储蓄投资\n\n记账建议：\n• 每笔消费随手记\n• 每周复盘一次\n• 月底看分类饼图\n\n第一步：设定一个月度预算，然后坚持记录。',data:'50/30/20法则 | 每周复盘',v:1},
     {id:'fi2',cat:'finance',title:'省钱小技巧',body:'日常省钱窍门：\n• 外卖改为自己做饭（省50%以上）\n• 订阅服务定期检查，取消不用的\n• 购物前等24小时冷静期\n• 用记账APP追踪每一笔\n\n记账不是限制自己，而是让每一笔钱花得清楚。',data:'关键: 自己做饭省50%+ | 冷静期: 24h',v:1},
     {id:'fi3',cat:'finance',title:'求职期财务规划',body:'求职期间理财建议：\n\n1. 预留3-6个月生活费\n2. 减少不必要的消费\n3. 记录求职相关开支（交通/打印/培训）\n4. 不要因为焦虑而乱花钱\n\n心态：求职是投资期，合理控制开支，不要过度焦虑。',data:'预留: 3-6个月生活费',v:1},
-    {id:'fi4',cat:'finance',title:'消费分类小知识',body:'消费四象限：\n\n重要且必要：房租/饮食/交通（不可省）\n重要非必要：教育/培训/体检（投资自己）\n非重要必要：基本衣物/日用品\n非重要非必要：零食/冲动消费（可以省）\n\n多把钱花在前两象限，少花在后两象限。',data:'分类: 重要必要 > 重要非必要 > 其他',v:1},
-    {id:'fi5',cat:'finance',title:'🎥 如何躺着赚钱？财富自由的起点！',body:'行长王德发出品的小白理财入门指南，用最通俗的方式讲透理财底层逻辑。\n\n视频干货：\n• 什么是真正的"财富自由"\n• 普通人理财的第一步该做什么\n• 存钱vs投资，怎么分配比例\n• 避开99%新手都会踩的坑\n\n看完你会对"钱生钱"有一个全新的认知 💰\n\n🎬 点击下方链接跳转B站观看完整视频。',type:'video',videoUrl:'https://www.bilibili.com/video/BV1w8bXzyESe/',videoCover:'🎬',data:'⏱ 约15分钟 | 📺 来源: B站 行长王德发 | 👁 63.7万播放',v:1},
-    {id:'fi6',cat:'finance',title:'🎥 躺不平输不起，年轻人理财有多难？',body:'半佛仙人深度聊年轻人理财困境，扎心但真实：\n\n• 为什么越省越穷？\n• 理财产品的套路大揭秘\n• 年轻人应该先存钱还是先投资\n• "你不理财，财不离你"真的对吗\n\n幽默犀利风格，笑着笑着就学会了避坑 😂\n\n🎬 点击下方链接跳转B站观看完整视频。',type:'video',videoUrl:'https://www.bilibili.com/video/BV1LdSeB2ETP/',videoCover:'🎬',data:'⏱ 约38分钟 | 📺 来源: B站 硬核的半佛仙人 | 👁 233万播放',v:1}
+    {id:'fi4',cat:'finance',title:'消费分类小知识',body:'消费四象限：\n\n重要且必要：房租/饮食/交通（不可省）\n重要非必要：教育/培训/体检（投资自己）\n非重要必要：基本衣物/日用品\n非重要非必要：零食/冲动消费（可以省）\n\n多把钱花在前两象限，少花在后两象限。',data:'分类: 重要必要 > 重要非必要 > 其他',v:1}
   );
   // AI技巧
   base.push(
@@ -665,25 +657,127 @@ function genFeedNotes(){
     {id:'ai4',cat:'ai',title:'AI帮你做数据分析（零代码）',body:'不需要会Python，AI帮你分析数据：\n\n1️⃣ 把Excel数据截图发给AI：\n"帮我分析这组销售数据，找出趋势和异常点"\n\n2️⃣ 让AI写SQL/公式：\n"帮我写一个公式计算1688店铺的月度ROI"\n\n3️⃣ AI做图表建议：\n"这些数据适合用什么图表展示？"\n\n💡 关键是学会问对问题，AI就能帮你干对活。',data:'关键词: 截图分析+写公式+图表建议 | 门槛: 零代码',v:1},
     {id:'ai5',cat:'ai',title:'AI面试陪练：模拟面试官',body:'用AI模拟面试，提升面试表现：\n\n⚡ 实操步骤：\n1. 告诉AI你的目标岗位\n2. 让AI扮演面试官提问\n3. 你打字/语音回答\n4. AI点评你的回答\n\nPrompt示例：\n"请你扮演一个1688运营岗的面试官，逐一向我提问，从自我介绍开始，每次问一个问题，等我回答后点评并追问"\n\n🎯 反复练习2-3轮，正式面试自信翻倍。',data:'工具: ChatGPT/Claude语音模式 | 建议: 练习2-3轮',v:1},
     {id:'ai6',cat:'ai',title:'AI生成小红书爆款笔记',body:'想做小红书副业？AI帮你写：\n\n📝 爆款笔记生成公式：\n1. 告诉AI你的领域（例如：减脂打卡）\n2. 描述目标受众（例如：25-35岁职场女生）\n3. 要求生成标题+正文+话题标签\n\nPrompt：\n"帮我写一篇小红书笔记，主题是"上班族减脂午餐推荐"，目标受众是25-35岁女生，标题要有吸引力，正文300字，带上热门话题标签"\n\n🎨 再用AI生成配图，一篇笔记10分钟搞定。',data:'效率: 10分钟/篇 | 搭配: AI文案+AI配图',v:1},
-    {id:'ai7',cat:'ai',title:'AI消除照片路人/背景',body:'拍照总是有路人入镜？AI一键消除！\n\n🛠 免费工具推荐：\n• 通义千问APP - 照片消除路人\n• Clipdrop - 在线AI修图\n• Remove.bg - AI免费去背景\n\n📱 手机也能用：\n• 华为/小米/OPPO自带AI消除功能\n• 美图秀秀AI消除\n\n💡 面试证件照：AI一键换底色、修瑕疵。\n\n⚠ AI修图再好，也要保持照片本真的自己。',data:'免费工具: 通义千问/Remove.bg | 场景: 去路人/换背景/证件照',v:1},
-    {id:'ai8',cat:'ai',title:'🎥 程序员鱼皮：AI编程0基础也能开发产品',body:'腾讯前程序员鱼皮教你用AI编程从0到1开发上线作品。\n\n内容涵盖：\n• 零基础AI编程环境搭建\n• 5个可商用变现的项目实战\n• 从想法到产品上线的完整流程\n• 不写一行代码也能做网站/工具\n\n🎬 点击下方链接跳转B站观看完整视频教程。',type:'video',videoUrl:'https://www.bilibili.com/video/BV1jU756mE1x/',videoCover:'🎬',data:'⏱ 视频时长: 约20分钟 | 📺 来源: B站 程序员鱼皮',v:1},
-    {id:'ai9',cat:'ai',title:'🎥 Gemini 3最强教程：8大场景实测',body:'2025年最火AI模型Gemini 3实战教程，覆盖工作和生活全场景：\n\n• 长文总结、英文邮件、绩效自评一键搞定\n• 自动整理笔记变成待办清单\n• 一键浓缩视频和播客重点\n• 健身数据、财务规划、职业决策全能分析\n\n🎬 点击下方链接跳转B站观看完整视频教程。',type:'video',videoUrl:'https://www.bilibili.com/video/BV1kxUMB7EJk/',videoCover:'🎬',data:'⏱ 视频时长: 约15分钟 | 📺 来源: B站',v:1},
-    {id:'ai10',cat:'ai',title:'🎥 NotebookLM+Gemini：最强AI工作流',body:'个人创作者必备的AI超级工作流！\n\n实操案例：\n• 500页资料压缩成一张专业信息图\n• Deep Research一键生成咨询级PPT\n• 技能趋势自动变成交互式图表\n• 企业战略看板一键生成可直接开会用\n\n🎬 点击下方链接跳转B站观看完整视频教程。',type:'video',videoUrl:'https://www.bilibili.com/video/BV1hzyuBXEiH/',videoCover:'🎬',data:'⏱ 视频时长: 约12分钟 | 📺 来源: B站',v:1}
+    {id:'ai7',cat:'ai',title:'AI消除照片路人/背景',body:'拍照总是有路人入镜？AI一键消除！\n\n🛠 免费工具推荐：\n• 通义千问APP - 照片消除路人\n• Clipdrop - 在线AI修图\n• Remove.bg - AI免费去背景\n\n📱 手机也能用：\n• 华为/小米/OPPO自带AI消除功能\n• 美图秀秀AI消除\n\n💡 面试证件照：AI一键换底色、修瑕疵。\n\n⚠ AI修图再好，也要保持照片本真的自己。',data:'免费工具: 通义千问/Remove.bg | 场景: 去路人/换背景/证件照',v:1}
   );
   return base;
+}
+
+// ===== VIDEO POOL (每日轮换) =====
+const VIDEO_POOL={
+  ops:[
+    {id:'vo1',title:'1688运营全套教程 | 从入门到精通',body:'从店铺搭建、标题优化到数字营销、数据分析，全套系统课程。\n\n• 新手开店基础搭建全流程\n• 标题优化+主图设计方法论\n• 生意参谋数据深度分析\n• 数字营销推广实操',videoUrl:'https://www.bilibili.com/video/BV1qa4y1m7HN/',data:'⏱ 约7小时 | 👁 16.9万播放'},
+    {id:'vo2',title:'1688运营日常必做五大块',body:'亿事君手把手教你1688运营日常工作清单：数据监控、商品优化、推广调整、客户维护、竞品分析。',videoUrl:'https://www.bilibili.com/video/BV1Lt4y1G7o8/',data:'⏱ 约2分钟 | 📺 亿事君'}
+  ],
+  interview:[
+    {id:'vi1',title:'万字求职指南 | 从简历到Offer全攻略',body:'程序员鱼皮出品，覆盖求职全流程：岗位选择、简历写法、投递技巧、笔试面试、薪资谈判、Offer选择。',videoUrl:'https://www.bilibili.com/video/BV1LEQLYqEGT/',data:'⏱ 约40分钟 | 📺 程序员鱼皮'},
+    {id:'vi2',title:'结构化面试干货 | 答题模板',body:'多次面试第一的UP主分享结构化面试攻略：思维导图+逐字稿练习法、自信大方表现技巧。',videoUrl:'https://www.bilibili.com/video/BV1U3hBz7Egn/',data:'⏱ 约30分钟 | 适用: 结构化面试'}
+  ],
+  diet:[
+    {id:'vd1',title:'帕梅拉 15分钟高效燃脂',body:'无需器械、全程站立、新手也能跟上的高效燃脂训练。帕梅拉跳跃有氧，配乐动感快乐暴汗~',videoUrl:'https://www.bilibili.com/video/BV1QS4y1P7Yu/',data:'⏱ 约15分钟 | 📺 帕梅拉PamelaReif'},
+    {id:'vd2',title:'欧阳春晓 30分钟普拉提瘦全身',body:'无跑跳、膝盖友好，适合大基数。全程口令指导，减脂+塑形+修复体态三合一。',videoUrl:'https://www.bilibili.com/video/BV1Di421U7am/',data:'⏱ 约30分钟 | 📺 欧阳春晓Aurora'},
+    {id:'vd3',title:'帕梅拉 20分钟热舞辣妹燃脂',body:'10首歌让你又性感又酷！全程跟音乐节奏跳舞暴汗，平均心率155，消耗190千卡。',videoUrl:'https://www.bilibili.com/video/BV1WDeXzZEb5/',data:'⏱ 约20分钟 | 📺 帕梅拉PamelaReif'},
+    {id:'vd4',title:'帕梅拉 15分钟站立腹肌燃脂',body:'全程站姿核心HIIT，无需瑜伽垫！跟音乐节奏踩点，腹肌训练+有氧燃脂双重效果。',videoUrl:'https://www.bilibili.com/video/BV1LKazzeEMJ/',data:'⏱ 约15分钟 | 📺 帕梅拉PamelaReif'},
+    {id:'vd5',title:'帕梅拉 10分钟活力有氧+水瓶燃脂',body:'手持水瓶或小重量，燃脂+手臂+腰腹三合一！10分钟消耗80-140千卡。',videoUrl:'https://www.bilibili.com/video/BV1G346zHEDh/',data:'⏱ 约10分钟 | 📺 帕梅拉PamelaReif'}
+  ],
+  english:[
+    {id:'ve1',title:'英语兔：16种时态终极详解',body:'B站最受欢迎英语语法课！一个视频合集搞定所有时态，零基础也能跟上。配套大量例句和对比表格。',videoUrl:'https://www.bilibili.com/video/BV1Sv411y7d8/',data:'⏱ 约1小时 | 👁 1028万播放'},
+    {id:'ve2',title:'央视《美丽中国》53集 | 英语听力神作',body:'央视出品中英双语短片，标准英音旁白语速适中。每集2-4分钟，碎片时间就能听。',videoUrl:'https://www.bilibili.com/video/BV1Ey4y1B7ud/',data:'⏱ 53集 | 👁 1002万播放'}
+  ],
+  speaking:[
+    {id:'vs1',title:'BBC官方音标教程 | 英式发音零基础入门',body:'B站最经典英音入门！92集系统讲解英式音标，真人嘴型示范。619万播放神级教程。',videoUrl:'https://www.bilibili.com/video/BV127411n7nj/',data:'⏱ 92集 | 👁 619万播放'},
+    {id:'vs2',title:'如何练成纯正英式口音？全英教学',body:'没去过英国也能练出RP口音！英音核心发音技巧拆解+常见中式发音错误纠正',videoUrl:'https://www.bilibili.com/video/BV1hV411f7cb/',data:'⏱ 约5分钟 | 👁 41万播放'}
+  ],
+  beauty:[
+    {id:'vb1',title:'扁平脸淡颜日常妆 | 12分钟保姆级教程',body:'漫笙出品，专为淡颜扁平脸打造。从妆前护肤开始手把手跟练，怼脸拍摄每个细节清清楚楚。',videoUrl:'https://www.bilibili.com/video/BV1CwQ6YsEiR/',data:'⏱ 约12分钟 | 📺 漫笙'},
+    {id:'vb2',title:'拯救扁塌细软发质 | 高颅顶蓬松教程',body:'吹风机+发根蓬松夹+定型喷雾分区教程，打造蓬松高颅顶不伤发质。',videoUrl:'https://www.bilibili.com/video/BV1JS4y1G7ek/',data:'⏱ 约8分钟 | 适合: 细软发质'},
+    {id:'vb3',title:'唐毅：学会2个淡妆关键告别无效化妆',body:'底妆匀净无瑕+结构自然立体，女明星淡妆的关键细节全揭秘。',videoUrl:'https://www.bilibili.com/video/BV19gsUzTE2o/',data:'⏱ 约10分钟 | 📺 唐毅'},
+    {id:'vb4',title:'唐毅：6个让妆容突飞猛进的冷知识',body:'空心三角提亮法、深浅三角形修容、视错觉修鼻法…亲测超有用淡妆小技巧',videoUrl:'https://www.bilibili.com/video/BV1UeFpztEtj/',data:'⏱ 约8分钟 | 📺 唐毅'}
+  ],
+  finance:[
+    {id:'vf1',title:'行长王德发：财富自由的起点',body:'小白理财入门指南，用最通俗方式讲透理财底层逻辑。存钱vs投资怎么分配？',videoUrl:'https://www.bilibili.com/video/BV1w8bXzyESe/',data:'⏱ 约15分钟 | 👁 63.7万播放'},
+    {id:'vf2',title:'半佛仙人：年轻人理财有多难？',body:'幽默犀利风格深度聊理财困境。为什么越省越穷？理财产品套路大揭秘。',videoUrl:'https://www.bilibili.com/video/BV1LdSeB2ETP/',data:'⏱ 约38分钟 | 👁 233万播放'}
+  ],
+  ai:[
+    {id:'va1',title:'程序员鱼皮：AI编程0基础也能开发产品',body:'零基础AI编程环境搭建+5个可商用项目实战+从想法到上线完整流程。',videoUrl:'https://www.bilibili.com/video/BV1jU756mE1x/',data:'⏱ 约20分钟 | 📺 程序员鱼皮'},
+    {id:'va2',title:'Gemini 3最强教程：8大场景实测',body:'长文总结、英文邮件、绩效自评、笔记整理、视频浓缩、健身数据、财务规划、职业决策。',videoUrl:'https://www.bilibili.com/video/BV1kxUMB7EJk/',data:'⏱ 约15分钟'},
+    {id:'va3',title:'NotebookLM+Gemini：最强AI工作流',body:'500页资料压缩成信息图、Deep Research生成PPT、技能趋势变交互图表。',videoUrl:'https://www.bilibili.com/video/BV1hzyuBXEiH/',data:'⏱ 约12分钟'}
+  ]
+};
+
+function hashStr(s){let h=0;for(let i=0;i<s.length;i++){h=((h<<5)-h)+s.charCodeAt(i);h|=0;}return h}
+function seededRandom(seed){let s=hashStr(seed);return function(){s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;}}
+function seededShuffle(arr,seed){const rng=seededRandom(seed);const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+
+function getTodayStr(){const d=new Date();return `${d.getFullYear()}-${(d.getMonth()+1).toString().padStart(2,'0')}-${d.getDate().toString().padStart(2,'0')}`}
+
+function getDailyVideos(){
+  const today=getTodayStr();
+  const stored=JSON.parse(localStorage.getItem('dailyVideos')||'null');
+  if(stored&&stored.date===today)return stored.videos;
+  const videos=[];
+  const cats=['ops','interview','diet','english','speaking','beauty','finance','ai'];
+  cats.forEach(cat=>{
+    const pool=VIDEO_POOL[cat]||[];
+    if(!pool.length)return;
+    const seed=today+'-'+cat;
+    const shuffled=seededShuffle(pool,seed);
+    const count=Math.min(2,pool.length);
+    shuffled.slice(0,count).forEach(v=>{
+      videos.push({id:'v-'+v.id,cat,title:'🎥 '+v.title,body:v.body,type:'video',videoUrl:v.videoUrl,videoCover:'🎬',data:v.data||'',ts:Date.now(),v:1});
+    });
+  });
+  localStorage.setItem('dailyVideos',JSON.stringify({date:today,videos}));
+  // update history
+  let hist=JSON.parse(localStorage.getItem('videoHistory')||'[]');
+  hist=hist.filter(h=>h.date!==today);
+  hist.unshift({date:today,counts:{}});
+  cats.forEach(cat=>{hist[0].counts[cat]=videos.filter(v=>v.cat===cat).length});
+  hist=hist.slice(0,60);
+  localStorage.setItem('videoHistory',JSON.stringify(hist));
+  return videos;
 }
 
 // Initialize feed notes (merge new ones, keep old)
 function initFeedNotes(){
   const fresh=genFeedNotes();
-  if(!allNotes||!allNotes.length){allNotes=fresh;save('notes',allNotes);return;}
+  const dailyVids=getDailyVideos();
+  if(!allNotes||!allNotes.length){allNotes=[...fresh,...dailyVids];save('notes',allNotes);return;}
+  // Remove old video notes, keep text notes
+  allNotes=allNotes.filter(n=>n.type!=='video');
+  // Add today's videos
+  allNotes.push(...dailyVids);
+  // Merge new text notes
   const existingIds=new Set(allNotes.map(n=>n.id));
   let added=false;
   fresh.forEach(n=>{if(!existingIds.has(n.id)){allNotes.push(n);added=true}});
   if(added)save('notes',allNotes);
 }
 
-// ===== NAVIGATION =====
+// ===== VIDEO HISTORY =====
+function showVideoHistory(){
+  const hist=JSON.parse(localStorage.getItem('videoHistory')||'[]');
+  const cats={ops:'🏭1688运营',interview:'💼面试',diet:'🥗减脂',english:'📖英语',speaking:'🗣英音',beauty:'✨变美',finance:'💰记账',ai:'🤖AI'};
+  let rows='';
+  if(hist.length===0)rows='<p style="text-align:center;color:var(--text3);padding:20px">暂无视频历史记录</p>';
+  else hist.forEach((h,i)=>{
+    const ds=h.date.split('-');
+    const dateLabel=`${ds[1]}月${ds[2]}日`;
+    const isToday=h.date===getTodayStr();
+    let pills='';
+    Object.entries(cats).forEach(([k,v])=>{
+      const c=h.counts[k]||0;
+      if(c>0)pills+=`<span style="display:inline-block;background:var(--bg);padding:2px 10px;border-radius:12px;font-size:11px;margin:2px 3px">${v} ×${c}</span>`;
+    });
+    rows+=`<div style="padding:10px 0;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px"><span style="font-weight:600;white-space:nowrap;min-width:60px">${isToday?'🟢 ':''}${dateLabel}</span><span style="flex:1;font-size:12px">${pills}</span></div>`;
+  });
+  $('fcModalInner').innerHTML=`
+    <span class="fc-close" onclick="$('fcModal').classList.remove('show')">✕</span>
+    <h2 style="margin-bottom:16px">📹 视频推送记录</h2>
+    <p style="font-size:12px;color:var(--text3);margin-bottom:12px">每天自动推送不同视频，最多保留60天记录</p>
+    ${rows}
+  `;
+  $('fcModal').classList.add('show');
+}
 function navTo(page,el){
   qsa('.page.active').forEach(p=>p.classList.remove('active'));
   const pg=$('page-'+page);
@@ -1222,13 +1316,16 @@ if('serviceWorker' in navigator){
   });
 }
 navigator.serviceWorker&&navigator.serviceWorker.addEventListener('message',e=>{
-  if(e.data&&e.data.type==='SW_UPDATED')$('updateBanner').classList.add('show');
+  if(e.data&&e.data.type==='SW_UPDATED'&&!sessionStorage.getItem('sw_applied'))$('updateBanner').classList.add('show');
 });
 
 function updateApp(){
-  if(swReg&&swReg.waiting){swReg.waiting.postMessage({type:'SKIP_WAITING'});window.location.reload()}
-  else window.location.reload();
+  sessionStorage.setItem('sw_applied','1');
+  $('updateBanner').classList.remove('show');
+  if(swReg&&swReg.waiting){swReg.waiting.postMessage({type:'SKIP_WAITING'})}
+  setTimeout(()=>window.location.reload(),300);
 }
+function dismissUpdateBanner(){$('updateBanner').classList.remove('show');sessionStorage.setItem('sw_applied','1')}
 
 // ===== INIT =====
 function init(){
