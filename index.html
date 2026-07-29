@@ -1174,6 +1174,11 @@ function updateBackupStatus(){
   }else{$('backupStatus').textContent='尚未导出过备份，建议立即导出一份'}
 }
 function checkBackupReminder(){
+  const dismissed=load('backupReminderDismissed','');
+  if(dismissed){
+    const since=Date.now()-new Date(dismissed).getTime();
+    if(since<86400000)return; // 24h内不再提醒
+  }
   if(!backupTime){showBackupReminder();return}
   const days=Math.floor((Date.now()-new Date(backupTime).getTime())/86400000);
   if(days>=3)showBackupReminder();
@@ -1183,7 +1188,7 @@ function showBackupReminder(){
   $('backupReminderMsg').textContent=!backupTime?'你还没有导出过数据备份，建议立即导出一份以防数据丢失。':`距离上次备份已经 ${days} 天了，建议导出最新备份确保数据安全。`;
   $('backupReminder').classList.add('show');
 }
-function closeBackupReminder(){$('backupReminder').classList.remove('show')}
+function closeBackupReminder(){save('backupReminderDismissed',TODAY);$('backupReminder').classList.remove('show')}
 
 // ===== SERVICE WORKER =====
 let swReg=null;
