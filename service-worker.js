@@ -1,9 +1,10 @@
 // ============================================================
 // 呼噜苹果工作台 - Service Worker
 // 功能：离线缓存 + 版本更新检测
+// 动态时间戳版本 - 每次部署自动更新
 // ============================================================
 
-const CACHE_VERSION = 'hulu-apple-v2';
+const CACHE_VERSION = 'hulu-apple-v3-' + Date.now();
 const STATIC_CACHE = CACHE_VERSION + '-static';
 const RUNTIME_CACHE = CACHE_VERSION + '-runtime';
 
