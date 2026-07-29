@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#fff5f5"/>
+  <defs>
+    <radialGradient id="appleGrad" cx="38%" cy="32%">
+      <stop offset="0%" stop-color="#ff6b6b"/>
+      <stop offset="60%" stop-color="#e83838"/>
+      <stop offset="100%" stop-color="#c41e1e"/>
+    </radialGradient>
+    <linearGradient id="leafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7ec850"/>
+      <stop offset="100%" stop-color="#4a9c2a"/>
+    </linearGradient>
+  </defs>
+  <!-- Apple body -->
+  <path d="M256 120 C200 120 165 150 150 185 C135 220 140 280 170 340 C195 390 225 420 256 420 C287 420 317 390 342 340 C372 280 377 220 362 185 C347 150 312 120 256 120 Z" fill="url(#appleGrad)"/>
+  <!-- Highlight -->
+  <ellipse cx="210" cy="200" rx="35" ry="50" fill="#ff8a8a" opacity="0.4" transform="rotate(-25 210 200)"/>
+  <!-- Stem -->
+  <path d="M256 120 Q256 100 260 85 Q264 75 258 68" stroke="#8B5A2B" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <!-- Leaf -->
+  <path d="M262 85 Q285 70 305 82 Q300 100 278 98 Q268 95 262 85 Z" fill="url(#leafGrad)"/>
+  <path d="M270 88 Q285 82 298 88" stroke="#3a7a1a" stroke-width="2" fill="none" opacity="0.5"/>
+</svg>
